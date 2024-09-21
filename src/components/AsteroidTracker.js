@@ -101,8 +101,14 @@ const AsteroidTracker = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const toggleOrbits = () => {
+    setShowOrbits((prev) => !prev);
+    setHoveredAsteroid(null);
+  }
+
   const toggleMotion = () => {
     setIsMoving((prev) => !prev);
+    setHoveredAsteroid(null);
   };
 
   const getTimeUntilOrbit = (asteroid) => {
@@ -141,7 +147,7 @@ const AsteroidTracker = () => {
   </button>
 
   <button 
-    onClick={() => setShowOrbits(!showOrbits)}
+    onClick={toggleOrbits}
     style={{
       padding: '10px 20px',
       fontSize: '16px',
@@ -170,7 +176,9 @@ const AsteroidTracker = () => {
           padding: '10px',
           borderRadius: '5px',
           maxWidth: '300px'
-        }}>
+        }}
+        onClick={() => setHoveredAsteroid(null)}
+        >
           <h2 style={{ margin: '0 0 10px 0' }}>{hoveredAsteroid.name}</h2>
           <p>Velocity: {hoveredAsteroid.velocity} km/s</p> {/* Adjusted unit */}
           <p>Distance: {hoveredAsteroid.distance} km</p>
