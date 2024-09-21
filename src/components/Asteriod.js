@@ -17,13 +17,22 @@ const Asteroid = ({ position, data, color, setHoveredAsteroid }) => {
   
     return (
       <>
-        <mesh 
-          ref={meshRef}
-          onPointerOver={(e) => {
-            e.stopPropagation();
-            setHoveredAsteroid(data);
-          }}
-          onPointerOut={() => setHoveredAsteroid(null)}
+      <mesh 
+            ref={meshRef}
+            onPointerOver={(e) => {
+              e.stopPropagation();
+              setHoveredAsteroid(data);
+            }}
+            onPointerDown={(e) => {
+              e.stopPropagation();
+              setHoveredAsteroid(data);
+            }}
+            onPointerOut={() => setHoveredAsteroid(null)}
+            onTouchStart={(e) => {
+              e.stopPropagation();
+              setHoveredAsteroid(data);
+            }}
+            onTouchEnd={() => setHoveredAsteroid(null)}
         >
           <sphereGeometry args={[0.05, 16, 16]} />
           <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.5} />
